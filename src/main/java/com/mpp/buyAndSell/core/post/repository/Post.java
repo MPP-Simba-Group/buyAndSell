@@ -1,6 +1,8 @@
 package com.mpp.buyAndSell.core.post.repository;
 
 
+import com.mpp.buyAndSell.core.post.photouploadcontroller.PhotoUploadController;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,8 @@ public class Post {
     @Column(columnDefinition="text")
     private String itemDescription;
     private double price;
+    private int likes;
+    private String photosURL= PhotoUploadController.uploadDirectory;
     public Post(){
 
     }
@@ -21,6 +25,7 @@ public class Post {
         this.setItemName(itemName);
         this.setItemDescription(itemDescription);
         this.setPrice(price);
+        this.setLikes(0);
     }
 
     public Post(Long id, String itemName, String itemDescription, double price) {
@@ -28,6 +33,7 @@ public class Post {
         this.setItemName(itemName);
         this.setItemDescription(itemDescription);
         this.setPrice(price);
+        this.setLikes(0);
     }
 
     public Long getId() {
@@ -62,6 +68,18 @@ public class Post {
         this.price = price;
     }
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public String getPhotosURL() {
+        return photosURL;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -69,6 +87,8 @@ public class Post {
                 ", itemName='" + itemName + '\'' +
                 ", itemDescription='" + itemDescription + '\'' +
                 ", price=" + price +
+                ", Number of Likes=" + likes+
+                ", Photo's URL=" +photosURL+
                 '}';//  ", price=" + price +
     }
 }
