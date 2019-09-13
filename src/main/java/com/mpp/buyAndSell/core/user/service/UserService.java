@@ -18,8 +18,8 @@ public class UserService {
         return getUserRepo().save(user);
     }
 
-    public Optional<User> getUser(Long id) {
-        return getUserRepo().findById(id);
+    public User getUser(Long id) {
+        return getUserRepo().findById(id).get();
     }
 
     public User updateUser(User user) {
@@ -28,6 +28,28 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return (List<User>) getUserRepo().findAll();
+    }
+
+    public User blockUser(Long id) {
+        Optional<User> optionalUser = getUserRepo().findById(id);
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setBlocked(true);
+            getUserRepo().save(user);
+            return user;
+        }
+        return null;
+    }
+
+    public User deactivateUser(Long id) {
+        Optional<User> optionalUser = getUserRepo().findById(id);
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setActive(false);
+            getUserRepo().save(user);
+            return user;
+        }
+        return null;
     }
 
     //------------------------------------setters and getters--------------------------

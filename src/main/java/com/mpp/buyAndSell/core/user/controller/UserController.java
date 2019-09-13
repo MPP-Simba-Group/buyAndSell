@@ -16,7 +16,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/{id}")
-    public Optional<User> getUser(@PathVariable Long id){
+    public User getUser(@PathVariable Long id){
         return getUserService().getUser(id);
     }
 
@@ -33,6 +33,16 @@ public class UserController {
     @GetMapping("/")
     public List<User> getAllUsers(){
         return getUserService().getAllUsers();
+    }
+
+    @PostMapping("/block")
+    public User blockUser(@RequestBody Long id){
+        return getUserService().blockUser(id);
+    }
+
+    @PostMapping("deactivate")
+    public User deactivateUser(@RequestBody Long id){
+        return getUserService().deactivateUser(id);
     }
 
 
