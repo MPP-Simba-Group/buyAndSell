@@ -1,4 +1,4 @@
-package com.mpp.buyAndSell.core.post.repository;
+package com.mpp.buyAndSell.core.post.entity;
 
 
 import com.mpp.buyAndSell.core.post.photouploadcontroller.PhotoUploadController;

@@ -13,7 +13,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id){
