@@ -25,8 +25,8 @@ public class Comment {
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
-    @Column(name = "DESC")
-    private String desc;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     //-------------------------------------setters and getters-------------------
 
@@ -54,11 +54,11 @@ public class Comment {
         this.user = user;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
