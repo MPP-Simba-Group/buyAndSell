@@ -1,36 +1,34 @@
 package com.mpp.buyAndSell.core.post.controller;
-import com.mpp.buyAndSell.core.post.repository.PostRepository;
-import com.mpp.buyAndSell.core.post.entity.Post;
-import com.mpp.buyAndSell.core.post.service.PostService;
+import com.mpp.buyAndSell.core.post.entity.Item;
+import com.mpp.buyAndSell.core.post.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 //import java.util.Optional;
 
 @RestController
 @RequestMapping("api/post/")
-public class PostController {
+public class ItemController {
     @Autowired
-    private PostService postService;
+    private ItemService itemService;
 
     @GetMapping("/posts")
-    public List<Post> index(){
-        return getPostService().findAll();
+    public List<Item> index(){
+        return getItemService().findAll();
     }
 
     @GetMapping("/posts/{id}")
-    public ResponseEntity<Post> show(@PathVariable Long id) throws Exception {
-        return getPostService().getPost(id);  // .getOne vs findOne vs findById .... put problem ahead.
+    public ResponseEntity<Item> show(@PathVariable Long id) throws Exception {
+        return getItemService().getPost(id);  // .getOne vs findOne vs findById .... put problem ahead.
     }
 
     @PostMapping("/posts/search") //a search functionality by item name, the whole or part of item name
-    public List<Post> search(@RequestBody String body){ //Map<String, String> body
+    public List<Item> search(@RequestBody String body){ //Map<String, String> body
         //String searchTerm=body.get("text");
         //return bsRepository.findByItemNameContainingOrItemDescriptionContaining(searchTerm,searchTerm);
-        return getPostService().search(body);
+        return getItemService().search(body);
     }
 //    public List<Post> search(@RequestBody Map<String, String> body){ //Map<String, String> body
 //        String searchTerm=body.get("text");
@@ -39,26 +37,26 @@ public class PostController {
 //    }
 
     @PostMapping("/add")
-    public Post addPost(@RequestBody Post post){
-        return getPostService().addPost(post);
+    public Item addPost(@RequestBody Item item){
+        return getItemService().addPost(item);
     }
 
     @PostMapping("/update")
-    public Post update(@RequestBody Post post){
-        return getPostService().updatePost(post);
+    public Item update(@RequestBody Item item){
+        return getItemService().updatePost(item);
     }
     @PostMapping("/delete/{id}")
     public boolean delete(@PathVariable Long id){
-        return getPostService().deletePost(id);
+        return getItemService().deletePost(id);
     }
 
     //----------------------------setters and getters-----------------------
 
-    public PostService getPostService() {
-        return postService;
+    public ItemService getItemService() {
+        return itemService;
     }
 
-    public void setPostService(PostService postService) {
-        this.postService = postService;
+    public void setItemService(ItemService itemService) {
+        this.itemService = itemService;
     }
 }

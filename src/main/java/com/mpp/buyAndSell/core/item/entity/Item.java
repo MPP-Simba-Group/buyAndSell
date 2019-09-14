@@ -4,31 +4,51 @@ package com.mpp.buyAndSell.core.post.entity;
 import com.mpp.buyAndSell.core.post.photouploadcontroller.PhotoUploadController;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
-public class Post {
+public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(columnDefinition="text")
+
+    @Column(name = "ITEM_NAME")
     private String itemName;
-    @Column(columnDefinition="text")
+
+    @Column(name = "ITEM_DESCRIPTION")
     private String itemDescription;
+
+    @Column(name = "PRICE")
     private double price;
+
+    @Column(name = "LIKES")
     private int likes;
+
+    @Column(name = "PHOTO_URL")
     private String photosURL= PhotoUploadController.uploadDirectory;
-    public Post(){
 
-    }
+    @Column(name = "CREATED_TIME")
+    private Timestamp createdTime;
 
-    public Post(String itemName, String itemDescription, double price) {
+    @Column(name = "EXPIRY_DATE")
+    private Timestamp expiryDate;
+
+    @Column(name = "CATEGORY")
+    private ItemCategoryEnum category;
+
+    @Column(name = "ACTIVE")
+    private boolean active;
+
+    public Item(){}
+
+    public Item(String itemName, String itemDescription, double price) {
         this.setItemName(itemName);
         this.setItemDescription(itemDescription);
         this.setPrice(price);
         this.setLikes(0);
     }
 
-    public Post(Long id, String itemName, String itemDescription, double price) {
+    public Item(Long id, String itemName, String itemDescription, double price) {
         this.setId(id);
         this.setItemName(itemName);
         this.setItemDescription(itemDescription);
@@ -80,6 +100,43 @@ public class Post {
         return photosURL;
     }
 
+    public void setPhotosURL(String photosURL) {
+        this.photosURL = photosURL;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public Timestamp getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Timestamp expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public ItemCategoryEnum getCategory() {
+        return category;
+    }
+
+    public void setCategory(ItemCategoryEnum category) {
+        this.category = category;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    //--------------------------toString-----------------------------
     @Override
     public String toString() {
         return "Post{" +
