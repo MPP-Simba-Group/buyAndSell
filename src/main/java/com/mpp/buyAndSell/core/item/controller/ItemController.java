@@ -1,6 +1,7 @@
-package com.mpp.buyAndSell.core.post.controller;
-import com.mpp.buyAndSell.core.post.entity.Item;
-import com.mpp.buyAndSell.core.post.service.ItemService;
+package com.mpp.buyAndSell.core.item.controller;
+import com.mpp.buyAndSell.core.comment.entity.Comment;
+import com.mpp.buyAndSell.core.item.entity.Item;
+import com.mpp.buyAndSell.core.item.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,17 +10,17 @@ import java.util.List;
 //import java.util.Optional;
 
 @RestController
-@RequestMapping("api/post/")
+@RequestMapping("api/item/")
 public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/posts")
+    @GetMapping("/")
     public List<Item> index(){
         return getItemService().findAll();
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/items/{id}")
     public ResponseEntity<Item> show(@PathVariable Long id) throws Exception {
         return getItemService().getPost(id);  // .getOne vs findOne vs findById .... put problem ahead.
     }
@@ -45,9 +46,15 @@ public class ItemController {
     public Item update(@RequestBody Item item){
         return getItemService().updatePost(item);
     }
+
     @PostMapping("/delete/{id}")
     public boolean delete(@PathVariable Long id){
         return getItemService().deletePost(id);
+    }
+
+    @PostMapping("comments")
+    public List<Comment> getItemComments(@RequestBody Long itemId){
+        return getItemService().getItemComments(itemId);
     }
 
     //----------------------------setters and getters-----------------------

@@ -1,7 +1,7 @@
-package com.mpp.buyAndSell.core.post.entity;
+package com.mpp.buyAndSell.core.item.entity;
 
 
-import com.mpp.buyAndSell.core.post.photouploadcontroller.PhotoUploadController;
+import com.mpp.buyAndSell.core.item.photouploadcontroller.PhotoUploadController;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

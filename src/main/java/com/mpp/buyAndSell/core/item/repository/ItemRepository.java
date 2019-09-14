@@ -1,6 +1,6 @@
-package com.mpp.buyAndSell.core.post.repository;
+package com.mpp.buyAndSell.core.item.repository;
 
-import com.mpp.buyAndSell.core.post.entity.Item;
+import com.mpp.buyAndSell.core.item.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
