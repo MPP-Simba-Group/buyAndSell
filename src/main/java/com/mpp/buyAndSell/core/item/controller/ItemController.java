@@ -1,6 +1,7 @@
 package com.mpp.buyAndSell.core.item.controller;
 import com.mpp.buyAndSell.core.comment.entity.Comment;
 import com.mpp.buyAndSell.core.item.entity.Item;
+import com.mpp.buyAndSell.core.item.entity.ItemCategoryEnum;
 import com.mpp.buyAndSell.core.item.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,11 @@ public class ItemController {
     @PostMapping("comments")
     public List<Comment> getItemComments(@RequestBody Long itemId){
         return getItemService().getItemComments(itemId);
+    }
+
+    @GetMapping("categories")
+    public List<ItemCategoryEnum> getAvailableItemCategories(){
+        return getItemService().getAvailableItemCategories();
     }
 
     //----------------------------setters and getters-----------------------

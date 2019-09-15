@@ -3,12 +3,14 @@ package com.mpp.buyAndSell.core.item.service;
 import com.mpp.buyAndSell.core.comment.entity.Comment;
 import com.mpp.buyAndSell.core.comment.service.CommentService;
 import com.mpp.buyAndSell.core.item.entity.Item;
+import com.mpp.buyAndSell.core.item.entity.ItemCategoryEnum;
 import com.mpp.buyAndSell.core.item.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -55,6 +57,10 @@ public class ItemService {
         return getCommentService().getItemComments(item);
     }
 
+    public List<ItemCategoryEnum> getAvailableItemCategories() {
+        return Arrays.asList(ItemCategoryEnum.values());
+    }
+
     //------------------------------setters and getters--------------------
 
     public ItemRepository getItemRepository() {
@@ -72,4 +78,5 @@ public class ItemService {
     public void setCommentService(CommentService commentService) {
         this.commentService = commentService;
     }
+
 }
