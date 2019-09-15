@@ -2,6 +2,7 @@ package com.mpp.buyAndSell.core.user.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "ORG_USER")
@@ -36,6 +37,9 @@ public class User {
 
     @Column(name = "BLOCKED")
     private boolean blocked;
+
+    @Column(name = "CREATED_DATE")
+    private Timestamp createdDate;
 
     //--------------------------------setters and getters-------------------------
     public long getId() {
@@ -108,5 +112,13 @@ public class User {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 }

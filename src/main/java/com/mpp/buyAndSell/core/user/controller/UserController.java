@@ -45,7 +45,10 @@ public class UserController {
         return getUserService().deactivateUser(id);
     }
 
-
+    @PostMapping("userChart")
+    public List<?> findUserDateChart(){
+        return getUserService().findUserDateChart();
+    }
     //---------------------------------------setters and getters----------------------------
     public UserService getUserService() {
         return userService;
