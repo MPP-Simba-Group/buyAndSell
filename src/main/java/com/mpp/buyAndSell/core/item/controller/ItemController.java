@@ -1,5 +1,6 @@
 package com.mpp.buyAndSell.core.item.controller;
 import com.mpp.buyAndSell.core.comment.entity.Comment;
+import com.mpp.buyAndSell.core.item.entity.IowaCitiesEnum;
 import com.mpp.buyAndSell.core.item.entity.Item;
 import com.mpp.buyAndSell.core.item.entity.ItemCategoryEnum;
 import com.mpp.buyAndSell.core.item.service.ItemService;
@@ -62,6 +63,11 @@ public class ItemController {
     @GetMapping("categories")
     public List<ItemCategoryEnum> getAvailableItemCategories(){
         return getItemService().getAvailableItemCategories();
+    }
+
+    @GetMapping("cities")
+    public List<IowaCitiesEnum> getIowaCities(){
+        return getItemService().getIowaCities();
     }
 
     //----------------------------setters and getters-----------------------

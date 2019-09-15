@@ -2,6 +2,7 @@ package com.mpp.buyAndSell.core.item.entity;
 
 
 import com.mpp.buyAndSell.core.item.photouploadcontroller.PhotoUploadController;
+import com.mpp.buyAndSell.core.user.entity.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -38,6 +39,13 @@ public class Item {
 
     @Column(name = "ACTIVE")
     private boolean active;
+
+    @Column(name = "CITY")
+    private IowaCitiesEnum city;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     public Item(){}
 
@@ -136,16 +144,38 @@ public class Item {
         this.active = active;
     }
 
+    public IowaCitiesEnum getCity() {
+        return city;
+    }
+
+    public void setCity(IowaCitiesEnum city) {
+        this.city = city;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     //--------------------------toString-----------------------------
+
     @Override
     public String toString() {
-        return "Post{" +
+        return "Item{" +
                 "id=" + id +
                 ", itemName='" + itemName + '\'' +
                 ", itemDescription='" + itemDescription + '\'' +
                 ", price=" + price +
-                ", Number of Likes=" + likes+
-                ", Photo's URL=" +photosURL+
-                '}';//  ", price=" + price +
+                ", likes=" + likes +
+                ", photosURL='" + photosURL + '\'' +
+                ", createdTime=" + createdTime +
+                ", expiryDate=" + expiryDate +
+                ", category=" + category +
+                ", active=" + active +
+                ", city=" + city +
+                '}';
     }
 }

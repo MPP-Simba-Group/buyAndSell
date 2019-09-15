@@ -2,6 +2,7 @@ package com.mpp.buyAndSell.core.item.service;
 
 import com.mpp.buyAndSell.core.comment.entity.Comment;
 import com.mpp.buyAndSell.core.comment.service.CommentService;
+import com.mpp.buyAndSell.core.item.entity.IowaCitiesEnum;
 import com.mpp.buyAndSell.core.item.entity.Item;
 import com.mpp.buyAndSell.core.item.entity.ItemCategoryEnum;
 import com.mpp.buyAndSell.core.item.repository.ItemRepository;
@@ -59,6 +60,10 @@ public class ItemService {
 
     public List<ItemCategoryEnum> getAvailableItemCategories() {
         return Arrays.asList(ItemCategoryEnum.values());
+    }
+
+    public List<IowaCitiesEnum> getIowaCities() {
+        return Arrays.asList(IowaCitiesEnum.values());
     }
 
     //------------------------------setters and getters--------------------
