@@ -21,6 +21,7 @@ public class UserService {
     public User getUser(Long id) {
         return getUserRepo().findById(id).get();
     }
+    
 
     public User updateUser(User user) {
         return getUserRepo().save(user);
@@ -50,6 +51,10 @@ public class UserService {
             return user;
         }
         return null;
+    }
+    
+    public User findUserByToken(String token) {
+    	return getUserRepo().findByToken(token);
     }
 
     //------------------------------------setters and getters--------------------------
