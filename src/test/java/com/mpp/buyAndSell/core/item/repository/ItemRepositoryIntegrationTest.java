@@ -1,6 +1,6 @@
-package com.mpp.buyAndSell.core.post.repository;
+package com.mpp.buyAndSell.core.item.repository;
 
-import com.mpp.buyAndSell.core.post.entity.Post;
+import com.mpp.buyAndSell.core.item.entity.Item;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +15,19 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class PostRepositoryIntegrationTest {
+public class ItemRepositoryIntegrationTest {
 	@Autowired
 	private TestEntityManager entityManager;
 	@Autowired
-	private PostRepository postRepository;
+	private ItemRepository itemRepository;
 
 	@Test
 	public void findByItemNameContaining() {
-		List<Post> post= new ArrayList<>();
-		post.add(new Post("Google X","excellent smart phone", 577.0));
+		List<Item> post= new ArrayList<>();
+		post.add(new Item("Google X","excellent smart phone", 577.0));
 		entityManager.persist(post.get(0));
 		entityManager.flush();
-		List<Post> found=postRepository.findByItemNameContaining("Google");
+		List<Item> found= itemRepository.findByItemNameContaining("Google");
 		assertThat(found.get(0).getItemName()).isEqualTo("Google X");
 	}
 }

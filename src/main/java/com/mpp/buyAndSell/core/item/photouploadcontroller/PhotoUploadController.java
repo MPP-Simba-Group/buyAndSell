@@ -1,4 +1,4 @@
-package com.mpp.buyAndSell.core.post.photouploadcontroller;
+package com.mpp.buyAndSell.core.item.photouploadcontroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,5 +1,5 @@
 package com.mpp.buyAndSell;
-import com.mpp.buyAndSell.core.post.photouploadcontroller.PhotoUploadController;
+import com.mpp.buyAndSell.core.item.photouploadcontroller.PhotoUploadController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
