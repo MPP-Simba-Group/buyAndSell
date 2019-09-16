@@ -28,7 +28,7 @@ public class ItemController {
         return getItemService().getPost(id);  // .getOne vs findOne vs findById .... put problem ahead.
     }
 
-    @PostMapping("/posts/search") //a search functionality by item name, the whole or part of item name
+    @PostMapping("/items/search") //a search functionality by item name, the whole or part of item name
     public List<Item> search(@RequestBody String body){ //Map<String, String> body
         //String searchTerm=body.get("text");
         //return bsRepository.findByItemNameContainingOrItemDescriptionContaining(searchTerm,searchTerm);

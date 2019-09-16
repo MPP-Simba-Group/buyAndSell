@@ -66,6 +66,14 @@ public class ItemService {
         return Arrays.asList(IowaCitiesEnum.values());
     }
 
+    public List<?> getItemCategoryChart(){
+        return getItemRepository().getItemCategoryChart();
+    }
+
+    public List<?> getItemDateChart() {
+        return getItemRepository().getItemDateChart();
+    }
+
     //------------------------------setters and getters--------------------
 
     public ItemRepository getItemRepository() {
@@ -83,5 +91,6 @@ public class ItemService {
     public void setCommentService(CommentService commentService) {
         this.commentService = commentService;
     }
+
 
 }

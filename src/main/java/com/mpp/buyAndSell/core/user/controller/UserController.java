@@ -46,7 +46,6 @@ public class UserController {
         return getUserService().deactivateUser(id);
     }
 
-
     //---------------------------------------setters and getters----------------------------
     public UserService getUserService() {
         return userService;
