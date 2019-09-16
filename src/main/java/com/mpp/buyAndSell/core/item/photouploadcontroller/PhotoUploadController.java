@@ -11,17 +11,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @RestController
-@RequestMapping("api/uploadPhoto/")
+@RequestMapping("api/photo/")
 @CrossOrigin
 public class PhotoUploadController {
-	public static String uploadDirectory="C:\\Temp\\uploads\\";
+	public static String uploadDirectory="F:\\Temp\\uploads\\";
 
-	@PostMapping("/photo/upload")
+	@PostMapping("upload")
 	public String upload(Model model, @RequestParam("file") MultipartFile file) {
 		
 		StringBuilder fileNames=new StringBuilder();
 		Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
-		new File(fileNameAndPath.toString()).mkdirs();
+		new File(uploadDirectory).mkdirs();
 		fileNames.append(file.getOriginalFilename());
 		try {
 			Files.write(fileNameAndPath, file.getBytes());
