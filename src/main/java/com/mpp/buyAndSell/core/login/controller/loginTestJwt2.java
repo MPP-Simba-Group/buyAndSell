@@ -56,7 +56,7 @@ public class loginTestJwt2 {
 	}
 
 	@RequestMapping(value = "/testToken", method = RequestMethod.POST)
-	public String test(@RequestParam("token") String token) {
+	public User test(@RequestParam("token") String token) {
 
 		
 		System.out.println("====== login =======");
@@ -64,14 +64,15 @@ public class loginTestJwt2 {
 		//token = "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2Mjg5ODk4MDksImlhdCI6MTU2ODUwOTgwOX0.osy9TRYwv6jUA6YkHSgSX1i7fvaD2LDkyDqsDbOvOmeMaL2kXFwWCt85HSV3jT_tPsqsP8EfLCxjWhUyv4-MVw";
 		try {
 			User user = userService.findUserByToken(token);
-			String email = user.getEmail();
+			/*String email = user.getEmail();
 			System.out.println("email : "+email);
-			return email;
+			return email;*/
+			return user;
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return "no token ";
+			return null;
 		}
 	}
 	

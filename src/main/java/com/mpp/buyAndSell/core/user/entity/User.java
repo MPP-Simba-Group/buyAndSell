@@ -44,8 +44,41 @@ public class User implements UserDetails{
     
     @Column(name="password")
     private String password;
+    Boolean Admin;
+    Boolean seller;
+    Boolean buyer;
     
-    public String getToken() {
+    public Boolean getAdmin() {
+		return Admin;
+	}
+
+
+	public void setAdmin(Boolean admin) {
+		Admin = admin;
+	}
+
+
+	public boolean isSeller() {
+		return seller;
+	}
+
+
+	public void setSeller(boolean seller) {
+		this.seller = seller;
+	}
+
+
+	public boolean isBuyer() {
+		return buyer;
+	}
+
+
+	public void setBuyer(boolean buyer) {
+		this.buyer = buyer;
+	}
+
+
+	public String getToken() {
 		return token;
 	}
 
