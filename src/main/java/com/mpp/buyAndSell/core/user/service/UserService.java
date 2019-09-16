@@ -52,8 +52,8 @@ public class UserService {
         return null;
     }
 
-    public List<?> findUserDateChart(){
-        return getUserRepo().findUserDateChart();
+    public List<?> getUserDateChart(){
+        return getUserRepo().getUserDateChart();
     }
 
     //------------------------------------setters and getters--------------------------
