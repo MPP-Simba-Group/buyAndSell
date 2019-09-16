@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item,Long> {
-   List<Item> findByItemNameContainingOrItemDescriptionContaining(String text, String text2);
+//   List<Item> findByItemNameContainingOrItemDescriptionContaining(String text, String text2);
    List<Item> findByItemNameContaining(String text);
 
    @Query("select i.category, count(i.id) from Item as i group by i.category")
