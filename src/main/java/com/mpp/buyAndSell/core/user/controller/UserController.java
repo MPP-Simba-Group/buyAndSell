@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/user/")
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -22,6 +23,7 @@ public class UserController {
 
     @PostMapping("/add")
     public User addUser(@RequestBody User user){
+
         return getUserService().addUser(user);
     }
 
