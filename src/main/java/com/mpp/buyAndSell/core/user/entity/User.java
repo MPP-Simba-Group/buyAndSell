@@ -1,12 +1,17 @@
 package com.mpp.buyAndSell.core.user.entity;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.sql.Timestamp;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "ORG_USER")
-public class User {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -33,10 +38,80 @@ public class User {
     private String whatsapp;
 
     @Column(name = "ACTIVE")
-    private boolean active;
+    private Boolean active;
 
     @Column(name = "BLOCKED")
-    private boolean blocked;
+    private Boolean blocked;
+
+    @Column(name="password")
+    private String password;
+    Boolean Admin;
+    Boolean seller;
+    Boolean buyer;
+
+    public Boolean getAdmin() {
+		return Admin;
+	}
+
+
+	public void setAdmin(Boolean admin) {
+		Admin = admin;
+	}
+
+
+	public boolean isSeller() {
+		return seller;
+	}
+
+
+	public void setSeller(boolean seller) {
+		this.seller = seller;
+	}
+
+
+	public boolean isBuyer() {
+		return buyer;
+	}
+
+
+	public void setBuyer(boolean buyer) {
+		this.buyer = buyer;
+	}
+
+
+	public String getToken() {
+		return token;
+	}
+
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	@Column(name="token")
+    private String token;
+
+    public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+    public User(long id, String firstName, String lastName, @Email String email,String password) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password=password;
+
+	}
+
 
     @Column(name = "CREATED_DATE")
     private Timestamp createdDate;
@@ -98,7 +173,7 @@ public class User {
         this.whatsapp = whatsapp;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
@@ -106,7 +181,7 @@ public class User {
         this.active = active;
     }
 
-    public boolean isBlocked() {
+    public Boolean isBlocked() {
         return blocked;
     }
 
@@ -121,4 +196,53 @@ public class User {
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
     }
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
