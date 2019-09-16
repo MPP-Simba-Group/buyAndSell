@@ -26,7 +26,7 @@ public class Item {
     private int likes;
 
     @Column(name = "PHOTO_URL")
-    private String photosURL= PhotoUploadController.uploadDirectory;
+    private String photosURL;
 
     @Column(name = "CREATED_TIME")
     private Timestamp createdTime;
