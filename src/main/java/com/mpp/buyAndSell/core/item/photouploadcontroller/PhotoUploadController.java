@@ -2,6 +2,7 @@ package com.mpp.buyAndSell.core.item.photouploadcontroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,13 +20,16 @@ public class PhotoUploadController {
 	public String UploadPage(Model model) {
 		return "uploadview";
 	}
+
+
 	@RequestMapping("/photo/upload")
-	public String upload(Model model, @RequestParam("files") MultipartFile[] files) {
+	@CrossOrigin
+	public String upload(Model model, @RequestParam("file") MultipartFile file) {
 		
 		StringBuilder fileNames=new StringBuilder();
-		for(MultipartFile file:files) {
+		//for(MultipartFile file:files) {
 			//Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
-			Path fileNameAndPath=Paths.get(uploadDirectory, "photo");
+			Path fileNameAndPath=Paths.get(uploadDirectory, file.getOriginalFilename());
 			fileNames.append(file.getOriginalFilename());
 			try {
 				Files.write(fileNameAndPath, file.getBytes());
@@ -34,10 +38,10 @@ public class PhotoUploadController {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-		}
-		model.addAttribute("msg", "Successfully uploaded files "+fileNames.toString());
+		//}
+//		model.addAttribute("msg", "Successfully uploaded files "+fileNames.toString());
 		
-		return "uploadstatusview";
+		return /*fileNameAndPath.toString()*/"ahmed";
 		
 	}
 }

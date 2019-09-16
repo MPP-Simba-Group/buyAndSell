@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface UserRepo extends CrudRepository<User, Long> {
 
-    @Query("select month(u.createdDate), count(u.id) from User as u where month(CURRENT_DATE)-month(u.createdDate) < 6 group by month(u.createdDate)")
+    @Query("select month(u.createdDate), count(u.id) from User as u where month(CURRENT_DATE)-month(u.createdDate) < 6 group by month(u.createdDate) order by month(u.createdDate)")
     public List<?> getUserDateChart();
 }

@@ -3,10 +3,7 @@ package com.mpp.buyAndSell.core.statistics;
 import com.mpp.buyAndSell.core.item.service.ItemService;
 import com.mpp.buyAndSell.core.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,17 +18,17 @@ public class StatisticsController {
     @Autowired
     private ItemService itemService;
 
-    @PostMapping("userChart")
+    @GetMapping("userChart")
     public List<?> getUserDateChart(){
         return getUserService().getUserDateChart();
     }
 
-    @PostMapping("cateChart")
+    @GetMapping("cateChart")
     public List<?> getUserCategoryChart(){
         return getItemService().getItemCategoryChart();
     }
 
-    @PostMapping("itemChart")
+    @GetMapping("itemChart")
     public List<?> getItemDateChart(){
         return getItemService().getItemDateChart();
     }
