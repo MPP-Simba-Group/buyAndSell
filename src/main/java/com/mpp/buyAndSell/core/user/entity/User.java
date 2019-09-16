@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "ORG_USER")
-public class User implements UserDetails{
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -197,52 +197,39 @@ public class User implements UserDetails{
         this.createdDate = createdDate;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
+    public Boolean getBlocked() {
+        return blocked;
+    }
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
+    }
 
+    public String getPassword() {
+        return password;
+    }
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Boolean getSeller() {
+        return seller;
+    }
 
+    public void setSeller(Boolean seller) {
+        this.seller = seller;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public Boolean getBuyer() {
+        return buyer;
+    }
 
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public void setBuyer(Boolean buyer) {
+        this.buyer = buyer;
+    }
 }

@@ -2,11 +2,7 @@ package com.mpp.buyAndSell.core.login.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mpp.buyAndSell.core.user.entity.User;
 import com.mpp.buyAndSell.core.user.repo.UserRepo;
@@ -14,7 +10,11 @@ import com.mpp.buyAndSell.core.user.service.UserService;
 import com.mpp.buyAndSell.jwt2.JwtTokenUtil;
 import com.mpp.buyAndSell.jwt2Service.JwtUserDetailsServiceImpl;
 
+import java.util.UUID;
+
 @RestController
+@RequestMapping("api/auth")
+@CrossOrigin
 public class loginTestJwt2 {
 
 	@Autowired
@@ -29,29 +29,27 @@ public class loginTestJwt2 {
 	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestParam("email") String email, @RequestParam("password") String pass) {
+	public User login(@RequestBody UserCredential credential) {
 
 		System.out.println("====== login =======");
 
 		try {
 			//User user = userRepo.findByEmailAndPassword(email);
-			User user = userRepo.findByEmail(email);
-			if (user != null) {
-				UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
-				String token = jwtTokenUtil.generateToken(userDetails);
+			User user = userRepo.findByEmail(credential.getEmail());
+			if (user != null && credential.getPassword().equals(user.getPassword())) {
+				String token = UUID.randomUUID().toString();
 				user.setToken(token);
 				
 				userService.updateUser(user);
-				return token;
+				return user;
 			} else {
-				return "user is not exist";
+				return null;
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return "no token ";
+			return null;
 		}
 	}
 
