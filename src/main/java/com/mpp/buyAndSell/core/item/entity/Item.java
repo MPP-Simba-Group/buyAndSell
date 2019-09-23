@@ -1,11 +1,13 @@
 package com.mpp.buyAndSell.core.item.entity;
 
 
+import com.mpp.buyAndSell.core.comment.entity.Comment;
 import com.mpp.buyAndSell.core.item.photouploadcontroller.PhotoUploadController;
 import com.mpp.buyAndSell.core.user.entity.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 public class Item {
@@ -46,6 +48,9 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @OneToMany
+    private List<Comment> comments;
 
     public Item(){}
 
@@ -91,6 +96,7 @@ public class Item {
     public double getPrice() {
         return price;
     }
+
 
     public void setPrice(double price) {
         this.price = price;
@@ -158,6 +164,14 @@ public class Item {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     //--------------------------toString-----------------------------

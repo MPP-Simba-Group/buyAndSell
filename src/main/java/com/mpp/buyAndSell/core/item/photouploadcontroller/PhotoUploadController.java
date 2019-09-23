@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 @RequestMapping("api/photo/")
 @CrossOrigin
 public class PhotoUploadController {
-	public static String uploadDirectory="F:\\Temp\\uploads\\";
+	public static String uploadDirectory="F:\\Projects\\java-projects\\MPP-Project\\buy-and-sell-ui\\BuyAndSell-UI\\src\\assets";
 
 	@PostMapping("upload")
 	public String upload(Model model, @RequestParam("file") MultipartFile file) {

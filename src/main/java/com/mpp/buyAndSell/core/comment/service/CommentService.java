@@ -23,6 +23,10 @@ public class CommentService {
         return comments;
     }
 
+    public List<Comment> getAllComments(){
+        return (List<Comment>) getCommentRepository().findAll();
+    }
+
     //---------------------------------------setters and getters----------------------
     public CommentRepository getCommentRepository() {
         return commentRepository;
