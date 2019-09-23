@@ -1,5 +1,7 @@
 package com.mpp.buyAndSell.core.user.entity;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.sql.Timestamp;
@@ -33,10 +35,89 @@ public class User {
     private String whatsapp;
 
     @Column(name = "ACTIVE")
-    private boolean active;
+    private Boolean active;
 
     @Column(name = "BLOCKED")
-    private boolean blocked;
+    private Boolean blocked;
+
+    @Column(name="password")
+    private String password;
+    Boolean Admin;
+    Boolean seller;
+    Boolean buyer;
+
+    public Boolean getAdmin() {
+		return Admin;
+	}
+
+
+	public void setAdmin(Boolean admin) {
+		Admin = admin;
+	}
+
+
+	public boolean isSeller() {
+		return seller;
+	}
+
+
+	public void setSeller(boolean seller) {
+		this.seller = seller;
+	}
+
+
+	public boolean isBuyer() {
+		return buyer;
+	}
+
+
+	public void setBuyer(boolean buyer) {
+		this.buyer = buyer;
+	}
+
+
+	public String getToken() {
+		return token;
+	}
+
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	@Column(name="token")
+    private String token;
+
+    public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+    public User(long id, String firstName, String lastName, @Email String email,String password) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password=password;
+
+	}
+
+    public User(long id, String firstName, String lastName, @Email String email,String password, Boolean blocked) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password=password;
+        this.blocked = blocked;
+    }
 
     @Column(name = "CREATED_DATE")
     private Timestamp createdDate;
@@ -98,7 +179,7 @@ public class User {
         this.whatsapp = whatsapp;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
@@ -106,7 +187,7 @@ public class User {
         this.active = active;
     }
 
-    public boolean isBlocked() {
+    public Boolean isBlocked() {
         return blocked;
     }
 
@@ -120,5 +201,41 @@ public class User {
 
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Boolean getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Boolean seller) {
+        this.seller = seller;
+    }
+
+    public Boolean getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Boolean buyer) {
+        this.buyer = buyer;
     }
 }

@@ -1,5 +1,6 @@
 package com.mpp.buyAndSell.core.item.service;
 
+import com.mpp.buyAndSell.core.FunctionalProgramming.Operations;
 import com.mpp.buyAndSell.core.comment.entity.Comment;
 import com.mpp.buyAndSell.core.comment.service.CommentService;
 import com.mpp.buyAndSell.core.item.entity.IowaCitiesEnum;
@@ -22,6 +23,9 @@ public class ItemService {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private Operations operations;
 
     public List<Item> findAll() {
         return getItemRepository().findAll();
@@ -66,19 +70,32 @@ public class ItemService {
         return Arrays.asList(IowaCitiesEnum.values());
     }
 
-    public List<?> getItemCategoryChart(){
-        return getItemRepository().getItemCategoryChart();
-    }
+    public List<?> getItemCategoryChart(){ return getItemRepository().getItemCategoryChart();  }
 
     public List<?> getItemDateChart() {
         return getItemRepository().getItemDateChart();
     }
 
+    public ItemCategoryEnum getTopCategory() {
+        return getOperations().topCategory.apply(getItemRepository().findAll());
+    }
+
+    public Double getToloalSellInQuarter() {
+        return getOperations().totalItemPriceInQuarter.apply(getItemRepository().findAll());
+    }
+
+    public Double getToloalSellInYear() {
+        return getOperations().totalItemPriceInYear.apply(getItemRepository().findAll());
+    }
+
+    public List<Item> getTopActiveItems() {
+        return getOperations().topActiveItems.apply(getItemRepository().findAll());
+    }
+
+
     //------------------------------setters and getters--------------------
 
-    public ItemRepository getItemRepository() {
-        return itemRepository;
-    }
+    public ItemRepository getItemRepository() {  return itemRepository;  }
 
     public void setItemRepository(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
@@ -90,6 +107,15 @@ public class ItemService {
 
     public void setCommentService(CommentService commentService) {
         this.commentService = commentService;
+    }
+
+
+    public Operations getOperations() {
+        return operations;
+    }
+
+    public void setOperations(Operations operations) {
+        this.operations = operations;
     }
 
 
