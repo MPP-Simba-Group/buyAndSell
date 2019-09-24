@@ -10,6 +10,12 @@ import java.sql.Timestamp;
 @Table(name = "COMMENT")
 public class Comment {
 
+    public Comment(User user, Item item, String description) {
+        this.user = user;
+        this.item = item;
+        this.description = description;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -29,11 +35,6 @@ public class Comment {
     private String description;
 
     //-------------------------------------setters and getters-------------------
-    public Comment(User user, Item item, String description) {
-        this.user = user;
-        this.item = item;
-        this.description = description;
-    }
 
     public Long getId() {
         return id;
