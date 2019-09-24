@@ -1,12 +1,16 @@
 package com.mpp.buyAndSell.core.FunctionalProgramming;
 
 import com.mpp.buyAndSell.core.comment.entity.Comment;
+import com.mpp.buyAndSell.core.item.entity.IowaCitiesEnum;
 import com.mpp.buyAndSell.core.item.entity.Item;
 import com.mpp.buyAndSell.core.item.entity.ItemCategoryEnum;
 import com.mpp.buyAndSell.core.user.entity.User;
+
+import org.joda.time.Period;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -20,6 +24,25 @@ import java.util.stream.Collectors;
 @Service
 public class Operations {
 
+	// used in item service
+	public Function<List<Item>, IowaCitiesEnum> getMostCityHasProducts = (L) -> L.stream()
+			.collect(Collectors.groupingBy(Item::getCity)).entrySet().stream()
+			.sorted((city1, city2) -> city2.getValue().size() - city1.getValue().size()).findFirst().get().getKey();
+
+//used in item service
+	/*
+	 * public TriFunction<List<Item>, Long,LocalDate,
+	 * List<Item>>getProductsWithKdays=(L,K,M)->L.stream()
+	 * .filter(e->(Timestamp.valueOf( LocalDateTime.now()) -
+	 * e.getCreatedTime())==K).collect(Collectors.toList());
+	 */
+	public BiFunction<List<Item>, Timestamp, List<Item>> getProductsAfterDate = (l, t) -> l.stream()
+			.filter(i -> i.getCreatedTime().after(t)).collect(Collectors.toList());
+
+	public Function<List<Item>, User> getMostedActiveSeller = (L) -> L.stream()
+			.collect(Collectors.groupingBy(Item::getUser)).entrySet().stream()
+			.sorted((user1, user2) -> user2.getValue().size() - user1.getValue().size()).findFirst().get().getKey();
+
     //used in user service
     public Function<List<User>,List<User>> blockedUsers = (l) -> l.stream()
             .filter(user -> user.isBlocked().equals(true))
@@ -32,13 +55,13 @@ public class Operations {
             .max((i1,i2)-> i2.getValue().size() - i1.getValue().size()).get().getKey();
 
     //used in user service
-    public BiFunction<List<Comment>,User,List<Comment>> userComments = (c,u)-> c.stream()
-            .filter(x -> x.getUser().equals(u))
+    public BiFunction<List<Comment>,Integer,List<Comment>> userComments = (c,u)-> c.stream()
+            .filter(x -> x.getUser().getId() == u)
             .collect(Collectors.toList());
 
     //used in user service
-    public BiFunction<List<Item>,User,List<Item>> userItems = (i,u)-> i.stream()
-            .filter(x -> x.getUser().equals(u))
+    public BiFunction<List<Item>,Integer,List<Item>> userItems = (I,U)-> I.stream()
+            .filter(x -> x.getUser().getId() == U)
             .collect(Collectors.toList());
 
     //used in user service
@@ -77,4 +100,7 @@ public class Operations {
             .limit(5)
             .collect(Collectors.toList());
 
+	public Function<List<Comment>, User> getMostedActiveCommenter = (L) -> L.stream()
+			.collect(Collectors.groupingBy(Comment::getUser)).entrySet().stream()
+			.sorted((user1, user2) -> user2.getValue().size() - user1.getValue().size()).findFirst().get().getKey();
 }

@@ -80,11 +80,11 @@ public class UserService {
     }
 
     public List<Comment> getUserComments(User u){
-        return getOperations().userComments.apply(getCommentService().getAllComments(),u);
+        return getOperations().userComments.apply(getCommentService().getAllComments(),(int) u.getId());
     }
 
     public List<Item> getUserItems(User u){
-        return getOperations().userItems.apply(getItemService().findAll(),u);
+        return getOperations().userItems.apply(getItemService().findAll(),(int) u.getId());
     }
 
     public List<User> getTop5Sellers(){
