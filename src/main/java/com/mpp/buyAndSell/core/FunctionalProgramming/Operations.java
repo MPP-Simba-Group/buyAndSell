@@ -31,13 +31,13 @@ public class Operations {
             .max((i1,i2)-> i2.getValue().size() - i1.getValue().size()).get().getKey();
 
     //used in user service
-    public BiFunction<List<Comment>,User,List<Comment>> userComments = (c,u)-> c.stream()
-            .filter(x -> x.getUser().equals(u))
+    public BiFunction<List<Comment>,Integer,List<Comment>> userComments = (c,u)-> c.stream()
+            .filter(x -> x.getUser().getId() == u)
             .collect(Collectors.toList());
 
     //used in user service
-    public BiFunction<List<Item>,User,List<Item>> userItems = (I,U)-> I.stream()
-            .filter(x -> x.getUser().equals(U))
+    public BiFunction<List<Item>,Integer,List<Item>> userItems = (I,U)-> I.stream()
+            .filter(x -> x.getUser().getId() == U)
             .collect(Collectors.toList());
 
     //used in user service

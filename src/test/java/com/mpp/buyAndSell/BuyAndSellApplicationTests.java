@@ -1,6 +1,11 @@
 package com.mpp.buyAndSell;
 
 import com.mpp.buyAndSell.core.FunctionalProgramming.Operations;
+import com.mpp.buyAndSell.core.comment.entity.Comment;
+import com.mpp.buyAndSell.core.comment.service.CommentService;
+import com.mpp.buyAndSell.core.item.entity.Item;
+import com.mpp.buyAndSell.core.item.entity.ItemCategoryEnum;
+import com.mpp.buyAndSell.core.item.service.ItemService;
 import com.mpp.buyAndSell.core.user.entity.User;
 import com.mpp.buyAndSell.core.user.repo.UserRepo;
 import com.mpp.buyAndSell.core.user.service.UserService;
@@ -27,6 +32,13 @@ public class BuyAndSellApplicationTests {
 	UserService userService;
 
 	@Mock
+	CommentService commentService;
+
+
+	@Mock
+	ItemService itemService;
+
+	@Mock
 	private UserRepo userRepo;
 
 //	@Mock
@@ -38,6 +50,28 @@ public class BuyAndSellApplicationTests {
 		when(getUserService().getAllUsers()).thenReturn(getUsersList());
 		assertEquals(5, getOperations().blockedUsers.apply(getUsersList()).size());
 	}
+
+	@Test
+	public void testTopCategory() {
+		//when(getCommentService().getAllComments()).thenReturn(getCommentsList());
+		when(getItemService().findAll()).thenReturn(getItemsList());
+		assertEquals(ItemCategoryEnum.CAR, getOperations().topCategory.apply(getItemsList()));
+	}
+
+	@Test
+    public void testUserComments() {
+        when(getCommentService().getAllComments()).thenReturn(getCommentsList());
+        when(getItemService().findAll()).thenReturn(getItemsList());
+
+        assertEquals(1, getOperations().userComments.apply(getCommentsList(),5).size());
+    }
+
+    @Test
+    public void testUserItems() {
+        when(getItemService().findAll()).thenReturn(getItemsList());
+
+        assertEquals(1, getOperations().userItems.apply(getItemsList(),5).size());
+    }
 
 	public UserRepo getUserRepo() {
 		return userRepo;
@@ -61,6 +95,43 @@ public class BuyAndSellApplicationTests {
 
 	public void setOperations(Operations operations) {
 		this.operations = operations;
+	}
+
+
+	public CommentService getCommentService() {
+		return commentService;
+	}
+
+	public void setCommentService(CommentService commentService) {
+		this.commentService = commentService;
+	}
+
+	public ItemService getItemService() {
+		return itemService;
+	}
+
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
+	}
+
+	public List<Comment> getCommentsList(){
+		List<Comment> comments = new ArrayList<>();
+		for(int i = 0; i<10; i++){
+			Item item = new Item("Car"+i, "Car Description"+i, 0.5);
+			User user = new User(i, "firstName"+i, "lastName"+i, "email"+i+"@gmail.com","123"+i, i%2==0);
+			comments.add(new Comment( user,item,"good product"+i));
+		}
+		return comments;
+	}
+
+	public List<Item> getItemsList(){
+		List<Item> items = new ArrayList<>();
+		for(int i = 0; i<10; i++){
+            User user = new User(i, "firstName"+i, "lastName"+i, "email"+i+"@gmail.com","123"+i, i%2==0);
+            Item item = new Item("Car"+i, "Car Description"+i, 0.5, ItemCategoryEnum.CAR,user);
+			items.add(item);
+		}
+		return items;
 	}
 
 	public List<User> getUsersList(){

@@ -61,6 +61,15 @@ public class Item {
         this.setLikes(0);
     }
 
+    public Item(String itemName, String itemDescription, double price, ItemCategoryEnum category,User user) {
+        this.setItemName(itemName);
+        this.setItemDescription(itemDescription);
+        this.setPrice(price);
+        this.setLikes(0);
+        this.setCategory(category);
+        this.setUser(user);
+    }
+
     public Item(Long id, String itemName, String itemDescription, double price) {
         this.setId(id);
         this.setItemName(itemName);
