@@ -68,6 +68,16 @@ public class Item {
         this.setPrice(price);
         this.setLikes(0);
     }
+    public Item(Long id, String itemName, String itemDescription, double price,User u,IowaCitiesEnum city,Timestamp createdTime) {
+        this.setId(id);
+        this.setItemName(itemName);
+        this.setItemDescription(itemDescription);
+        this.setPrice(price);
+        this.setLikes(0);
+        this.setUser(u);
+        this.setCreatedTime(createdTime);
+        this.setCity(city);
+    }
 
     public Long getId() {
         return id;

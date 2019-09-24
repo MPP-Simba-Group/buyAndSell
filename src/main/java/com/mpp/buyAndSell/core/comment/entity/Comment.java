@@ -29,6 +29,11 @@ public class Comment {
     private String description;
 
     //-------------------------------------setters and getters-------------------
+    public Comment(User user, Item item, String description) {
+        this.user = user;
+        this.item = item;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
