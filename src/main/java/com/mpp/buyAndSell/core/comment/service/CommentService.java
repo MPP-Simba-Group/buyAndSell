@@ -3,6 +3,7 @@ package com.mpp.buyAndSell.core.comment.service;
 import com.mpp.buyAndSell.core.comment.entity.Comment;
 import com.mpp.buyAndSell.core.comment.repository.CommentRepository;
 import com.mpp.buyAndSell.core.item.entity.Item;
+import com.mpp.buyAndSell.core.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,9 @@ public class CommentService {
     public Comment addComment(Comment comment) {
         return getCommentRepository().save(comment);
     }
-
+    public List<Comment> getAllcomments() {
+        return (List<Comment>) getCommentRepository().findAll();
+    }
     public List<Comment> getItemComments(Item item) {
         List<Comment> comments = getCommentRepository().findByItem(item);
         return comments;
