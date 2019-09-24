@@ -46,6 +46,11 @@ public class User {
     Boolean seller;
     Boolean buyer;
 
+    public User(Long id, String firstName) {
+        this.id = id;
+        this.firstName = firstName;
+    }
+
     public Boolean getAdmin() {
 		return Admin;
 	}

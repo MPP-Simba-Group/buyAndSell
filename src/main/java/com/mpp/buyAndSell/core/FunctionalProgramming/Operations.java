@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collector;
@@ -36,12 +37,12 @@ public class Operations {
             .collect(Collectors.toList());
 
     //used in user service
-    public BiFunction<List<Item>,User,List<Item>> userItems = (I,U)-> I.stream()
-            .filter(x -> x.getUser().equals(U))
+    public BiFunction<List<Item>,User,List<Item>> userItems = (i,u)-> i.stream()
+            .filter(x -> x.getUser().equals(u))
             .collect(Collectors.toList());
 
     //used in user service
-    public Function<List<Item>,List<User>> Top5Sellers = (I)-> I.stream()
+    public Function<List<Item>,List<User>> top5Sellers = (i)-> i.stream()
             .collect(Collectors.groupingBy(Item::getUser))
             .entrySet().stream()
             .sorted((i1,i2)-> i2.getValue().size() - i1.getValue().size())
@@ -50,7 +51,7 @@ public class Operations {
             .collect(Collectors.toList());
 
     //used in user service
-    public Function<List<Comment>,List<User>> Top5Commentors = (I)-> I.stream()
+    public Function<List<Comment>,List<User>> top5Commentors = (i)-> i.stream()
             .collect(Collectors.groupingBy(Comment::getUser))
             .entrySet().stream()
             .sorted((i1,i2)-> i2.getValue().size() - i1.getValue().size())
@@ -59,16 +60,16 @@ public class Operations {
             .collect(Collectors.toList());
 
     //used in item service
-    public Function<List<Item>, Double> totalItemPriceInQuarter = l -> l.stream()
+    public Function<List<Item>, Optional<Double>> totalItemPriceInQuarter = l -> l.stream()
             .filter(item -> item.getCreatedTime().after(Timestamp.valueOf(LocalDateTime.now().plusMonths(-3))))
             .map(item -> item.getPrice())
-            .reduce((p1, p2) -> p1+p2).get();
+            .reduce((p1, p2) -> p1+p2);
 
     //used in item service
-    public Function<List<Item>, Double> totalItemPriceInYear = l -> l.stream()
+    public Function<List<Item>, Optional<Double>> totalItemPriceInYear = l -> l.stream()
             .filter(item -> item.getCreatedTime().after(Timestamp.valueOf(LocalDateTime.now().plusYears(-1))))
             .map(item -> item.getPrice())
-            .reduce((p1, p2) -> p1+p2).get();
+            .reduce((p1, p2) -> p1+p2);
 
     //used in item service
     public Function<List<Item>,List<Item>> topActiveItems = l -> l.stream()

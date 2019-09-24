@@ -69,6 +69,16 @@ public class Item {
         this.setLikes(0);
     }
 
+    public Item(Long id, String itemName, String itemDescription, double price, int likes, List<Comment> comments, Timestamp createdTime) {
+        this.setId(id);
+        this.setItemName(itemName);
+        this.setItemDescription(itemDescription);
+        this.setPrice(price);
+        this.setLikes(likes);
+        this.setComments(comments);
+        this.setCreatedTime(createdTime);
+    }
+
     public Long getId() {
         return id;
     }

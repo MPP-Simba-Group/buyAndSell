@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -80,11 +81,11 @@ public class ItemService {
         return getOperations().topCategory.apply(getItemRepository().findAll());
     }
 
-    public Double getToloalSellInQuarter() {
+    public Optional<Double> getToloalSellInQuarter() {
         return getOperations().totalItemPriceInQuarter.apply(getItemRepository().findAll());
     }
 
-    public Double getToloalSellInYear() {
+    public Optional<Double> getToloalSellInYear() {
         return getOperations().totalItemPriceInYear.apply(getItemRepository().findAll());
     }
 

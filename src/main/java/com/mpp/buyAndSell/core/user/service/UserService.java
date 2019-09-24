@@ -88,11 +88,11 @@ public class UserService {
     }
 
     public List<User> getTop5Sellers(){
-        return getOperations().Top5Sellers.apply(getItemService().findAll());
+        return getOperations().top5Sellers.apply(getItemService().findAll());
     }
 
     public List<User> getTop5Buyers(){
-        return getOperations().Top5Commentors.apply(getCommentService().getAllComments());
+        return getOperations().top5Commentors.apply(getCommentService().getAllComments());
     }
 
     //------------------------------------setters and getters--------------------------

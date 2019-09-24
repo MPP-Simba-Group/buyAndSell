@@ -28,6 +28,10 @@ public class Comment {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    public Comment(User user) {
+        this.user = user;
+    }
+
     //-------------------------------------setters and getters-------------------
 
     public Long getId() {
