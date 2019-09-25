@@ -13,15 +13,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
+//@RunWith(SpringRunner.class)
+//@DataJpaTest
 public class ItemRepositoryIntegrationTest {
 	@Autowired
 	private TestEntityManager entityManager;
 	@Autowired
 	private ItemRepository itemRepository;
 
-	@Test
+//	@Test
 	public void findByItemNameContaining() {
 		List<Item> post= new ArrayList<>();
 		post.add(new Item("Google X","excellent smart phone", 577.0));
