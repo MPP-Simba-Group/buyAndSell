@@ -103,4 +103,21 @@ public class Operations {
 	public Function<List<Comment>, User> getMostedActiveCommenter = (L) -> L.stream()
 			.collect(Collectors.groupingBy(Comment::getUser)).entrySet().stream()
 			.sorted((user1, user2) -> user2.getValue().size() - user1.getValue().size()).findFirst().get().getKey();
+
+
+	public Function<List<Item>, Integer> mostActiveMonth = i -> i.stream()
+            .map(item -> item.getCreatedTime().getMonth())
+            .collect(Collectors.groupingBy(Integer::intValue))
+            .entrySet().stream()
+            .sorted((e1, e2) -> e2.getValue().size()-e1.getValue().size())
+            .findFirst().get().getKey();
+
+	public BiFunction<List<Item>,Integer,List<Item>> itemsExceedsPrice = (l, i) -> l.stream()
+            .filter(item -> item.getPrice()>i)
+            .collect(Collectors.toList());
+
+	public BiFunction<List<Item>,Integer,Optional<Item>> mostLikedItemInMonth = (l, i) -> l.stream()
+            .filter(item -> i.equals(item.getCreatedTime().getMonth()))
+            .sorted((item1, item2) -> item2.getLikes() - item1.getLikes())
+            .findFirst();
 }

@@ -1,11 +1,9 @@
 package com.mpp.buyAndSell;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.mpp.buyAndSell.core.FunctionalProgramming.Operations;
 import com.mpp.buyAndSell.core.comment.entity.Comment;
@@ -23,10 +21,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 import com.mpp.buyAndSell.core.FunctionalProgramming.Operations;
 import com.mpp.buyAndSell.core.comment.entity.Comment;
 import com.mpp.buyAndSell.core.comment.repository.CommentRepository;
@@ -158,6 +156,24 @@ public class BuyAndSellApplicationTests {
     @Test
     public void testTop5Sellers(){
         assertEquals(5, getOperations().top5Sellers.apply(getItemsList2()).size());
+    }
+
+    @Test
+    public void testMostActiveMonth(){
+	    assertEquals(/*september*/8, getOperations().mostActiveMonth.apply(getItemsList2()).intValue());
+//	    assertEquals(doThrow(new NoSuchElementException("No value present")), getOperations().mostActiveMonth.apply(new ArrayList<>()).intValue());
+    }
+
+    @Test
+    public void testItemsExceedsPrice() {
+	    assertEquals(4, getOperations().itemsExceedsPrice.apply(getItemsList2(), 15).size());
+	    assertArrayEquals(new Object[0],getOperations().itemsExceedsPrice.apply(getItemsList2(), 100).toArray());
+    }
+
+    @Test
+    public void testMostLikedItemInMonth() {
+	    assertNotEquals(new Item(), getOperations().mostLikedItemInMonth.apply(getItemsList2(), 8));
+	    assertEquals(29, getOperations().mostLikedItemInMonth.apply(getItemsList2(),8).get().getLikes());
     }
 
 	public UserRepo getUserRepo() {
